@@ -454,7 +454,7 @@ end;
 class procedure TDelphiDevShellTasks.OpenWithApp(Info: TMethodInfo);
 begin
  try
-   ShellExecute(Info.hwnd, 'open', PChar(Info.Value1.AsString), PChar(Info.Value2.AsString) , nil , SW_SHOWNORMAL);
+   ShellExecute(Info.hwnd, 'open', PChar(Info.Value1.AsString), PChar(Format('"%s"',[Info.Value2.AsString])), nil , SW_SHOWNORMAL);
  except
    on  E: Exception do
    log(Format('TDelphiDevShellTasks.OpenWithApp Message %s  Trace %s',[E.Message, e.StackTrace]));

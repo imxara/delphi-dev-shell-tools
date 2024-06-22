@@ -59,10 +59,13 @@ type
     DelphiXE6,
     DelphiXE7,
     DelphiXE8,
-	  Delphi10Seattle,
-	  Delphi10Berlin,
-	  Delphi10Tokyo,
-	  Delphi10Rio
+    Delphi10Seattle,
+    Delphi10Berlin,
+    Delphi10Tokyo,
+    Delphi10Rio,
+    Delphi10Sydney,
+    Delphi11Alexandria,
+    Delphi12Athens
 );
 
   SetDelphiVersions= TArray<TDelphiVersions>;
@@ -199,8 +202,11 @@ const
     'RAD Studio XE8',
   	'RAD Studio 10 Seattle',
   	'RAD Studio 10 Berlin',
-	'RAD Studio 10 Tokyo',
-	'RAD Studio 10 Rio'
+  	'RAD Studio 10 Tokyo',
+    'RAD Studio 10 Rio',
+    'RAD Studio 10 Sydney',
+    'RAD Studio 11 Alexandria',
+    'RAD Studio 12 Athens'
     );
 
   DelphiRegPaths: array[TDelphiVersions] of string = (
@@ -226,8 +232,11 @@ const
     '\Software\Embarcadero\BDS\16.0',
     '\Software\Embarcadero\BDS\17.0',
     '\Software\Embarcadero\BDS\18.0',
-	'\Software\Embarcadero\BDS\19.0',
-	'\Software\Embarcadero\BDS\20.0'
+    '\Software\Embarcadero\BDS\19.0',
+   	'\Software\Embarcadero\BDS\20.0',
+    '\Software\Embarcadero\BDS\21.0',
+    '\Software\Embarcadero\BDS\22.0',
+    '\Software\Embarcadero\BDS\23.0'
     );
 
  PAClientProfilesPaths: array[TDelphiVersions] of string = (
@@ -253,8 +262,11 @@ const
     '\Embarcadero\BDS\16.0',
     '\Embarcadero\BDS\17.0',
     '\Embarcadero\BDS\18.0',
-	'\Embarcadero\BDS\19.0',
-	'\Embarcadero\BDS\20.0'
+   	'\Embarcadero\BDS\19.0',
+  	'\Embarcadero\BDS\20.0',
+    '\Embarcadero\BDS\21.0',
+    '\Embarcadero\BDS\22.0',
+    '\Embarcadero\BDS\23.0'
     );
 
   function  GetListInstalledDelphiVersions: TInstalledDelphiVerions;
@@ -473,7 +485,16 @@ begin
           if not VarIsClear(Node) then
           begin
             sVersion := Node.Text;
-            if MatchText(sVersion,['18.5', '18.6']) then
+            if MatchText(sVersion,['20.1']) then
+             Exit(TArray<TDelphiVersions>.Create(Delphi12Athens))
+            else
+            if MatchText(sVersion,['19.3', '19.4', '19.5']) then
+             Exit(TArray<TDelphiVersions>.Create(Delphi11Alexandria))
+            else
+            if MatchText(sVersion,['19.0', '19.1', '19.2']) then
+             Exit(TArray<TDelphiVersions>.Create(Delphi10Sydney))
+            else
+            if MatchText(sVersion,['18.5', '18.6', '18.7', '18.8']) then
              Exit(TArray<TDelphiVersions>.Create(Delphi10Rio))
             else				
             if MatchText(sVersion,['18.3', '18.4']) then
@@ -497,7 +518,7 @@ begin
             if MatchText(sVersion,['15.2']) then
              Exit(TArray<TDelphiVersions>.Create(Appmethod113))
             else
-            if MatchText(sVersion,['15.3', '15.1', '15.0']) then
+            if MatchText(sVersion,['15.3', '15.1']) then
              Exit(TArray<TDelphiVersions>.Create(DelphiXE5))
             else
             if MatchText(sVersion,['14.6']) then
